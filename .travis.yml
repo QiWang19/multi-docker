@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t qi/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t qiwanredhat/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run qi/react-test npm test -- --coverage
+  - docker run qiwanredhat/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t qi/multi-client ./client
-  - docker build -t qi/multi-nginx ./nginx
-  - docker build -t qi/multi-server ./server
-  - docker build -t qi/multi-worker ./worker
+  - docker build -t qiwanredhat/multi-client ./client
+  - docker build -t qiwanredhat/multi-nginx ./nginx
+  - docker build -t qiwanredhat/multi-server ./server
+  - docker build -t qiwanredhat/multi-worker ./worker
   # Login to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push qi/multi-client
-  - docker push qi/multi-nginx
-  - docker push qi/multi-server
-  - docker push qi/multi-worker
+  - docker push qiwanredhat/multi-client
+  - docker push qiwanredhat/multi-nginx
+  - docker push qiwanredhat/multi-server
+  - docker push qiwanredhat/multi-worker
